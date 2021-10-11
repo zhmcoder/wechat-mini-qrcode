@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -178,7 +178,7 @@ return [
 
         SmallRuralDog\Admin\AdminServiceProvider::class,
         Andruby\DeepAdmin\AdminServiceProvider::class,
-        zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
+        // zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 

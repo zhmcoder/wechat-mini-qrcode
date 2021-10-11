@@ -1,23 +1,6 @@
-rm -rf public/vendor/laravel-vue-admin
+composer require andruby/deep-admin andruby/laravel-vue-admin
 
-cd packages/Andruby/vue-element-admin
-git checkout .
-git pull
-npm install
-npm run production
+rm -rf public/vendor
 
-cd ..
-cd ..
-cd ..
 php artisan vendor:publish --provider="SmallRuralDog\Admin\AdminServiceProvider"
-
-cd packages/Andruby/deep-admin
-git checkout .
-git pull
-npm install
-npm run production
-
-cd ..
-cd ..
-cd ..
 php artisan vendor:publish --provider="Andruby\DeepAdmin\AdminServiceProvider"
