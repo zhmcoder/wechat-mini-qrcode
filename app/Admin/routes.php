@@ -11,4 +11,8 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('admin.index');
     $router->get('/home', 'HomeController@home')->name('admin.home');
 
+
+    $router->resource('brands', 'BrandsController')->names('brands');
+    $router->resource('category', 'CategoryController')->names('category');
+
 });
