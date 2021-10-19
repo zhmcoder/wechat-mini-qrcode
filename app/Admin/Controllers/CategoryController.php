@@ -4,8 +4,7 @@ namespace App\Admin\Controllers;
 
 use Andruby\DeepAdmin\Controllers\ContentController;
 use Andruby\DeepAdmin\Models\EntityField;
-use App\Admin\Models\Category;
-use App\Models\GoodsClass;
+use App\Models\Category;
 use SmallRuralDog\Admin\Components\Attrs\SelectOption;
 use SmallRuralDog\Admin\Components\Form\Checkbox;
 use SmallRuralDog\Admin\Components\Form\InputNumber;
