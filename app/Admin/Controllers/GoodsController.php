@@ -79,9 +79,10 @@ class GoodsController extends AdminController
     public function form($isEdit = false)
     {
         $form = new Form(new Goods());
-        $form->labelWidth("250px");
+        $form->labelWidth("180px");
 
-        $form->item('name', "商品名称")->required()->topComponent(Divider::make("基本信息"));
+        $form->item('name', "商品名称")->required()->inputWidth(10)
+            ->topComponent(Divider::make("基本信息"));
         $form->item('brand_id', "商品品牌")->required(true, 'integer')->serveRules("min:1")->component(Select::make(null)->filterable()->options(function () {
             return Brand::query()->orderBy('index_name')->get()->map(function ($item) {
                 return SelectOption::make($item->id, $item->name)->avatar(admin_file_url($item->icon))->desc(strtoupper($item->index_name));
@@ -97,7 +98,8 @@ class GoodsController extends AdminController
             ->component(Upload::make()->width(130)
                 ->height(130)->multiple(true, "id", "path")->limit(10))
             ->help("尺寸750x750像素以上，大小2M以下,最多10张图片，第一张为产品主图");
-        $form->item('description', "商品卖点")->help("选填，商品卖点简述，例如：此款商品美观大方 性价比较高 不容错过");
+        $form->item('description', "商品卖点")->inputWidth(10)
+            ->help("选填，商品卖点简述，例如：此款商品美观大方 性价比较高 不容错过");
 
         $form->item('one_attr', "规格类型")->component(RadioGroup::make(0)->options([
             Radio::make(1, "单规格"),
@@ -108,13 +110,17 @@ class GoodsController extends AdminController
         $form->item("cost_price", "进货价")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
         $form->item("line_price", "划线价")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
         $form->item("stock_num", "库存")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
-        $form->item("goods_sku", "产品规格")->vif("one_attr", 0)->component(GoodsSku::make());
+        $form->item("goods_sku", "产品规格")
+            ->vif("one_attr", 0)
+            ->component(GoodsSku::make());
 
 
         $form->item("on_shelf", "上架")->component(CSwitch::make());
 
-        $form->item("content1", "产品详情")
-            ->component(WangEditor::make());
+        $uploadImages = config('admin.route.api_prefix') . '/upload/images';
+        $form->item("content.content", "产品详情")
+            ->component(WangEditor::make()->uploadImgServer($uploadImages)
+                ->uploadFileName('file')->style('min-height:200px;'));
 
         $form->addValidatorRule([
             'goods_sku.goods_sku_list.*.price' => ["numeric", "min:0.01"]
