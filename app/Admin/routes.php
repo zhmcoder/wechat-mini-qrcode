@@ -15,9 +15,10 @@ Route::group([
     $router->resource('brands', 'BrandsController')->names('brands');
     $router->resource('category', 'CategoryController')->names('category');
 
-    //产品演示
+    //产品
     $router->resource('supplier', 'SuppliersController');
     $router->resource('brand', 'BrandController');
+    $router->resource('shop', 'ShopController');
     $router->resource('goods/class', 'GoodsClassController');
     $router->resource('goods/list', 'GoodsController');
     //产品操作
