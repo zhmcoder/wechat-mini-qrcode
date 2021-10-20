@@ -88,13 +88,13 @@ class GoodsController extends AdminController
                 return SelectOption::make($item->id, $item->name)->avatar(admin_file_url($item->icon))->desc(strtoupper($item->index_name));
             })->all();
         }));
-        $form->item("goods_class_path", "产品分类")->component(function () {
+        $form->item("goods_class_path", "产品分类")->required(true, 'array')->component(function () {
             $goods_class = new GoodsClass();
             $allNodes = $goods_class->toTree();
             return Cascader::make()->options($allNodes)->value("id")->label("name")->expandTrigger("hover");
         });
 
-        $form->item("images", "商品图片")
+        $form->item("images", "商品图片")->required(true, 'array')
             ->component(Upload::make()->width(130)
                 ->height(130)->multiple(true, "id", "path")->limit(10))
             ->help("尺寸750x750像素以上，大小2M以下,最多10张图片，第一张为产品主图");
@@ -123,9 +123,11 @@ class GoodsController extends AdminController
                 ->uploadFileName('file')->style('min-height:200px;'));
 
         $form->addValidatorRule([
-            'goods_sku.goods_sku_list.*.price' => ["numeric", "min:0.01"]
+            'goods_sku.goods_sku_list.*.price' => ["numeric", "min:0.01"],
+            'goods_sku.goods_sku_list' => ["array", "min:1"]
         ], [
-            'goods_sku.goods_sku_list.*.price.min' => '价格最小为0.01'
+            'goods_sku.goods_sku_list.*.price.min' => '价格最小为0.01',
+            'goods_sku.goods_sku_list.min' => '至少要添加一个规则'
         ]);
 
 
