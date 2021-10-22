@@ -98,11 +98,13 @@ class GoodsController extends AdminController
 
         $form->item('name', "商品名称")->required()->inputWidth(10)
             ->topComponent(Divider::make("基本信息"));
+
         $form->item('brand_id', "商品品牌")->required(true, 'integer')->serveRules("min:1")->component(Select::make(null)->filterable()->options(function () {
             return Brand::query()->orderBy('index_name')->get()->map(function ($item) {
                 return SelectOption::make($item->id, $item->name)->avatar(admin_file_url($item->icon))->desc(strtoupper($item->index_name));
             })->all();
         }));
+
         $form->item("goods_class_path", "产品分类")->required(true, 'array')->component(function () {
             $goods_class = new GoodsClass();
             $allNodes = $goods_class->toTree();
@@ -113,6 +115,7 @@ class GoodsController extends AdminController
             ->component(Upload::make()->width(130)
                 ->height(130)->multiple(true, "id", "path")->limit(10))
             ->help("尺寸750x750像素以上，大小2M以下,最多10张图片，第一张为产品主图");
+
         $form->item('description', "商品卖点")->inputWidth(13)
             ->help("选填，商品卖点简述，例如：此款商品美观大方 性价比较高 不容错过");
 
@@ -122,8 +125,11 @@ class GoodsController extends AdminController
         ])->disabled($isEdit))->topComponent(Divider::make("规格/库存"))->help("保存后无法修改");
 
         $form->item("price", "价格")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
+
         $form->item("cost_price", "进货价")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
+
         $form->item("line_price", "划线价")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
+
         $form->item("stock_num", "库存")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
         $form->item("goods_sku", "产品规格")
             ->vif("one_attr", 0)
@@ -229,7 +235,6 @@ class GoodsController extends AdminController
                                 'goods_id' => $goods->id,
                                 'name' => '',
                                 'attr_key' => $sku['attr_key'],
-
                                 'image' => $sku['image'] ?? $goods->cover->path,
                                 'price' => $sku['price'],
                                 'cost_price' => $sku['cost_price'] ?? 0.00,
@@ -242,6 +247,7 @@ class GoodsController extends AdminController
                         \App\Models\GoodsSku::setSkuStock($goods, $goods_sku, $sku['stock_num']);
 
                         \App\Models\GoodsSku::setSkuAttrValueMap($goods, $goods_sku, $sku['attrs']);
+
                         //TODO 根据订单关联，更新销量
                     });
                 }

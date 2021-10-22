@@ -50,7 +50,7 @@ class Goods extends Model
      */
     public function skus(): HasMany
     {
-        return $this->hasMany(GoodsSku::class, 'goods_id')->with(['stock', 'attrs']);
+        return $this->hasMany(GoodsSku::class, 'goods_id')->where('status', 1)->with(['stock', 'attrs']);
     }
 
     /**
