@@ -39,7 +39,7 @@ class GoodsClassController extends AdminController
         $grid->column('id', '序号')->width(100)->sortable()->align('center');
         $grid->column('name', '名称');
         $grid->column('goods_class_key', '唯一标识');
-        $grid->column('icon', '图标')->component(Image::make()->size(50, 50));
+        $grid->column('icon', '图标')->component(Image::make()->size(50, 50)->preview());
 
         $grid->toolbars(function (Grid\Toolbars $toolbars) {
             $toolbars->createButton()->content("添加分类");
@@ -61,8 +61,8 @@ class GoodsClassController extends AdminController
         $form->item('name', '名称')->inputWidth(15)->required();
         $form->item('goods_class_key', '唯一标识')->inputWidth(15)->required();
         $form->item('icon', '图标')->required()->component(Upload::make()->width(80)->height(80));
-        $form->item('order', '排序')->required()->component(InputNumber::make(1));
-        $form->item('status', '状态')->required()->component(Checkbox::make(1, "启用"));
+        $form->item('order', '排序')->required(true, 'integer')->component(InputNumber::make(1));
+        $form->item('status', '状态')->required(true, 'integer')->component(Checkbox::make(1, "启用"));
 
         return $form;
     }
