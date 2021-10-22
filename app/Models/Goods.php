@@ -20,10 +20,6 @@ class Goods extends Model
     ];
 
     protected $with = ['images'];
-    /**
-     * @var mixed
-     */
-    private $images;
 
     /**
      * 产品销售属性列表
