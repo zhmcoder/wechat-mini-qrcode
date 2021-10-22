@@ -3,10 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GoodsSku extends Model
 {
-
+    use SoftDeletes;
 
     const status = [-1, 0, 1];
 
@@ -16,25 +20,24 @@ class GoodsSku extends Model
 
     protected $with = ['stock'];
 
-
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function goods()
+    public function goods(): BelongsTo
     {
         return $this->belongsTo(Goods::class);
     }
 
     /**
      * SKU 库存
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function stock()
+    public function stock(): HasOne
     {
         return $this->hasOne(GoodsSkuStock::class, 'sku_id');
     }
 
-    public function attrs()
+    public function attrs(): BelongsToMany
     {
         return $this->belongsToMany(GoodsAttrValue::class, 'goods_sku_attr_value_maps', 'goods_sku_id', 'attr_value_id');
     }
@@ -48,7 +51,6 @@ class GoodsSku extends Model
     {
         return admin_file_url($this->image);
     }
-
 
     public static function setSkuStatus($goods, $status)
     {

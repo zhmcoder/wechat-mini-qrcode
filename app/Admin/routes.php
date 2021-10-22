@@ -21,6 +21,7 @@ Route::group([
     $router->resource('shop', 'ShopController');
     $router->resource('goods/class', 'GoodsClassController');
     $router->resource('goods/list', 'GoodsController');
+
     //产品操作
     $router->post("goods/addGoodsAttr", "GoodsController@addGoodsAttr")->name("addGoodsAttr");
     $router->post("goods/addGoodsAttrValue", "GoodsController@addGoodsAttrValue")->name("addGoodsAttrValue");

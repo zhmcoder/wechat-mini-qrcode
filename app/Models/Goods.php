@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Goods extends Model
 {
-
-
+    use SoftDeletes;
 
     protected $guarded = [];
 
@@ -18,12 +20,16 @@ class Goods extends Model
     ];
 
     protected $with = ['images'];
+    /**
+     * @var mixed
+     */
+    private $images;
 
     /**
      * 产品销售属性列表
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function attr_map()
+    public function attr_map(): HasMany
     {
         return $this->hasMany(GoodsAttrMap::class, 'goods_id')
             ->with([
@@ -33,61 +39,61 @@ class Goods extends Model
             ]);
     }
 
-    public function attr_value_map()
+    public function attr_value_map(): hasMany
     {
         return $this->hasMany(GoodsAttrValueMap::class, 'goods_id');
     }
 
     /**
      * 产品 SKU
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function skus()
+    public function skus(): HasMany
     {
         return $this->hasMany(GoodsSku::class, 'goods_id')->with(['stock', 'attrs']);
     }
 
     /**
      * 产品 库存列表
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function stock()
+    public function stock(): HasMany
     {
         return $this->hasMany(GoodsSkuStock::class, 'goods_id');
     }
 
     /**
      * 产品详情内容关联
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function content()
+    public function content(): HasOne
     {
         return $this->hasOne(GoodsContent::class);
     }
 
     /**
      * 产品分类关联
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function goodsClass()
+    public function goodsClass(): BelongsTo
     {
         return $this->belongsTo(GoodsClass::class);
     }
 
     /**
      * 产品品牌管理
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function brand()
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
 
     /**
      * 产品图片关联
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function images()
+    public function images(): HasMany
     {
         return $this->hasMany(GoodsImage::class);
     }
