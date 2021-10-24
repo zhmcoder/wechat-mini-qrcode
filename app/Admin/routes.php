@@ -31,6 +31,7 @@ Route::group([
     $router->resource('home/config', 'HomeConfigController')->names('home.config');
 
     $router->resource('search/list', 'SearchController')->names('search.list');
+    $router->resource('app/info', 'AppInfoController')->names('app.info');
 
     $router->get('home/column/info/{id}', 'HomeColumnController@info')->name('home.column.info');
     $router->get('home/column/relation_grid/{home_column_id}', 'HomeColumnController@relation_grid')->name('home.column.relation_grid');
