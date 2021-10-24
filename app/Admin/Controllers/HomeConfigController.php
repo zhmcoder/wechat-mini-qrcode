@@ -82,7 +82,7 @@ class HomeConfigController extends ContentController
         $option = $this->_radio($fields);
         $form->item("jump_type", "跳转类型")->required()->component(
             RadioGroup::make(0, $option)
-        );
+        )->required(true, 'integer');
 
         $form->item('content', 'H5详情')->component(
             WangEditor::make()->uploadImgServer($this->uploadImages)->uploadFileName('file')->style('min-height:300px;')
@@ -90,7 +90,7 @@ class HomeConfigController extends ContentController
 
         $form->item('h5_url', 'H5链接')->component(
             Input::make()->textarea(4)->showWordLimit()
-        )->inputWidth(15)->required(true, 'integer')->vif('jump_type', 3);
+        )->inputWidth(15)->vif('jump_type', 3);
 
         $form->item('config_type', 'config_type')->hideLabel()->component(Input::make($config_type)->type('hidden'));
 
