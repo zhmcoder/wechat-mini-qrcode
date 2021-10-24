@@ -27,7 +27,10 @@ Route::group([
     $router->post("goods/addGoodsAttrValue", "GoodsController@addGoodsAttrValue")->name("addGoodsAttrValue");
 
 
-    //首页配置相关
+    // 首页配置
+    $router->resource('home/config', 'HomeConfigController')->names('home/config');
+
+
     $router->get('home/column/info/{id}', 'HomeColumnController@info')->name('home.column.info');
     $router->get('home/column/relation_grid/{home_column_id}', 'HomeColumnController@relation_grid')->name('home.column.relation_grid');
     $router->post('home/column/save_column', 'HomeColumnController@save_column')->name('home.column.save_column');
