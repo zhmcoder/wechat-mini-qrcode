@@ -80,7 +80,7 @@ class HomeConfigController extends ContentController
 
         $fields = EntityField::query()->find(291);
         $option = $this->_radio($fields);
-        $form->item("jump_type", "跳转类型")->required()->component(
+        $form->item("jump_type", "跳转类型")->component(
             RadioGroup::make(0, $option)
         )->required(true, 'integer');
 
