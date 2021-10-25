@@ -20,8 +20,8 @@ Route::group([
     // 产品操作
     $router->resource('goods/class', 'GoodsClassController')->names('goods.class');
     $router->resource('goods/list', 'GoodsController')->names('goods.list');
-    $router->post("goods/addGoodsAttr", "GoodsController@addGoodsAttr")->name("goods.addGoodsAttr");
-    $router->post("goods/addGoodsAttrValue", "GoodsController@addGoodsAttrValue")->name("goods.addGoodsAttrValue");
+    $router->post("goods/addGoodsAttr", "GoodsController@addGoodsAttr")->name("addGoodsAttr");
+    $router->post("goods/addGoodsAttrValue", "GoodsController@addGoodsAttrValue")->name("addGoodsAttrValue");
 
     // 首页配置
     $router->resource('home/config', 'HomeConfigController')->names('home.config');
