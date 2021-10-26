@@ -118,7 +118,7 @@ class GoodsController extends AdminController
         $form->item("on_shelf", "上架")->component(CSwitch::make());
 
         $uploadImages = config('admin.route.api_prefix') . '/upload/images';
-        $form->item("content.content", "产品详情")
+        $form->item("content", "产品详情")
             ->component(WangEditor::make()->uploadImgServer($uploadImages)
                 ->uploadFileName('file')->style('min-height:200px;'));
 
