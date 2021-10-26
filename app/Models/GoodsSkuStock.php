@@ -9,8 +9,6 @@ class GoodsSkuStock extends Model
 {
     use SoftDeletes;
 
-    protected $table = "goods_sku_stock";
-
     public $timestamps = false;
 
     protected $guarded = [];

@@ -11,8 +11,6 @@ class GoodsAttrMap extends Model
 {
     use SoftDeletes;
 
-    protected $table = "goods_attr_map";
-
     public $timestamps = false;
 
     protected $guarded = [];
