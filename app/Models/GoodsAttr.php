@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GoodsAttr extends Model
 {
+    use SoftDeletes;
 
     protected $guarded = [];
 
-
-    public function values()
+    public function values(): HasMany
     {
         return $this->hasMany(GoodsAttrValue::class);
     }

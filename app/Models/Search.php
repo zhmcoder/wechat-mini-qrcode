@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class GoodsContent extends Model
+class Search extends Model
 {
     use SoftDeletes;
-
-    public $timestamps = false;
 }

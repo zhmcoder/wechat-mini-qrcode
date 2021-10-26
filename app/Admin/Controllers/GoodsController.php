@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Admin\Controllers;
-
 
 use App\Models\Brand;
 use App\Models\Goods;
@@ -32,42 +30,58 @@ use Andruby\DeepAdmin\Components\GoodsSku;
 
 class GoodsController extends AdminController
 {
-
     public function grid()
     {
         $grid = new Grid(new Goods());
 
-        $grid->quickSearch(['name']);
+        $grid->pageBackground()
+            ->defaultSort('id', 'desc')
+            ->stripe(true)
+            ->fit(true)
+            ->defaultSort('id', 'desc')
+            ->perPage(env('PER_PAGE', 15))
+            ->size(env('TABLE_SIZE', ''))
+            ->border(env('TABLE_BORDER', false))
+            ->emptyText("暂无数据");
 
-        $grid->column('id', "ID")->width(100)->sortable();
-        $grid->column('name', "商品名称")->width(300);
-        $grid->column('cover.path', '产品图片')->width(70)
-            ->component(Image::make()->size(50, 50)->preview())->align("center");
-        $grid->column('goodsClass.name', "产品分类")->width(100);
-        $grid->column('brand.name', "品牌")->width(100);
+        $grid->column('id', "序号")->width(80)->sortable()->align('center');
+        $grid->column('name', "商品名称")->width(150);
+        $grid->column('cover.path', '产品图片')->width(100)->component(Image::make()->size(50, 50)->preview())->align("center");
+        $grid->column('goodsClass.name', "产品分类")->width(150);
+        $grid->column('brand.name', "品牌")->width(150);
         $grid->column('on_shelf', "是否上架")->width(100)->align("center")->customValue(function ($row, $value) {
             return $value == 1 ? "上架" : "下架";
         })->component(Tag::make()->type(["上架" => "success", "下架" => "danger"]));
 
-        $grid->column('created_at', '发布时间');
+        $grid->column('created_at', '发布时间')->customValue(function ($row, $value) {
 
+        });
 
         $grid->actions(function (Grid\Actions $actions) {
+
         });
 
         $grid->filter(function (Grid\Filter $filter) {
+            $filter->equal('name', '商品名称')->component(Input::make());
             $filter->equal('brand_id', '所属品牌')->component(Select::make()->options(function () {
                 return Brand::query()->get()->map(function ($item) {
                     return SelectOption::make($item->id, $item->name);
                 })->all();
             }));
-            $filter->date('created_at', '发布日期')->component(DatePicker::make());
-            //$filter->between('created_at', '日期范围')->component(DatePicker::make()->type("daterange"));
-            $filter->equal('on_shelf', '上下架')->component(RadioGroup::make(null, [
-                Radio::make(1, '上架'),
-                Radio::make(0, '下架'),
-            ]));
+            $filter->date('created_at', '发布日期')->component(DatePicker::make()->style('width:150px;margin-left:5px;'));
+            /*
+            $filter->between('created_at', '日期范围')->component(DatePicker::make()->type("daterange"));
+            $filter->equal('on_shelf', '上下架')->component(
+                RadioGroup::make(null, [
+                    Radio::make(1, '上架'),
+                    Radio::make(0, '下架'),
+                ])
+            );
+            */
         });
+
+        $grid->quickFilter()->filterKey('on_shelf')->defaultValue(null)
+            ->quickOptions([Radio::make(1, '上架'), Radio::make(0, '下架')]);
 
         $grid->toolbars(function (Grid\Toolbars $toolbars) {
             $toolbars->createButton()->content("添加产品");
@@ -80,14 +94,17 @@ class GoodsController extends AdminController
     {
         $form = new Form(new Goods());
         $form->labelWidth("180px");
+        $form->getActions()->buttonCenter();
 
         $form->item('name', "商品名称")->required()->inputWidth(10)
             ->topComponent(Divider::make("基本信息"));
+
         $form->item('brand_id', "商品品牌")->required(true, 'integer')->serveRules("min:1")->component(Select::make(null)->filterable()->options(function () {
             return Brand::query()->orderBy('index_name')->get()->map(function ($item) {
                 return SelectOption::make($item->id, $item->name)->avatar(admin_file_url($item->icon))->desc(strtoupper($item->index_name));
             })->all();
         }));
+
         $form->item("goods_class_path", "产品分类")->required(true, 'array')->component(function () {
             $goods_class = new GoodsClass();
             $allNodes = $goods_class->toTree();
@@ -98,7 +115,8 @@ class GoodsController extends AdminController
             ->component(Upload::make()->width(130)
                 ->height(130)->multiple(true, "id", "path")->limit(10))
             ->help("尺寸750x750像素以上，大小2M以下,最多10张图片，第一张为产品主图");
-        $form->item('description', "商品卖点")->inputWidth(10)
+
+        $form->item('description', "商品卖点")->inputWidth(13)
             ->help("选填，商品卖点简述，例如：此款商品美观大方 性价比较高 不容错过");
 
         $form->item('one_attr', "规格类型")->component(RadioGroup::make(0)->options([
@@ -107,13 +125,15 @@ class GoodsController extends AdminController
         ])->disabled($isEdit))->topComponent(Divider::make("规格/库存"))->help("保存后无法修改");
 
         $form->item("price", "价格")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
+
         $form->item("cost_price", "进货价")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
+
         $form->item("line_price", "划线价")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
+
         $form->item("stock_num", "库存")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
         $form->item("goods_sku", "产品规格")
             ->vif("one_attr", 0)
             ->component(GoodsSku::make());
-
 
         $form->item("on_shelf", "上架")->component(CSwitch::make());
 
@@ -129,7 +149,6 @@ class GoodsController extends AdminController
             'goods_sku.goods_sku_list.*.price.min' => '价格最小为0.01',
             'goods_sku.goods_sku_list.min' => '至少要添加一个规则'
         ]);
-
 
         $form->saving(function (Form $form) {
             $form->goods_class_id = collect($form->input("goods_class_path"))->last();
@@ -147,7 +166,6 @@ class GoodsController extends AdminController
                 "goods_sku_list" => $form->model()->skus,
             ];
         });
-
 
         $form->DbTransaction(function (form $form) {
             /**@var Goods $goods */
@@ -184,7 +202,6 @@ class GoodsController extends AdminController
                 //首先将原有的删除
                 \App\Models\GoodsSku::setSkuStatus($goods, -1);
 
-
                 if (collect($skus)->count() <= 0) {
                     //无商品规格
                     //更新或创建
@@ -218,7 +235,6 @@ class GoodsController extends AdminController
                                 'goods_id' => $goods->id,
                                 'name' => '',
                                 'attr_key' => $sku['attr_key'],
-
                                 'image' => $sku['image'] ?? $goods->cover->path,
                                 'price' => $sku['price'],
                                 'cost_price' => $sku['cost_price'] ?? 0.00,
@@ -231,6 +247,7 @@ class GoodsController extends AdminController
                         \App\Models\GoodsSku::setSkuStock($goods, $goods_sku, $sku['stock_num']);
 
                         \App\Models\GoodsSku::setSkuAttrValueMap($goods, $goods_sku, $sku['attrs']);
+
                         //TODO 根据订单关联，更新销量
                     });
                 }

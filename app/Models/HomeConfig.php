@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class GoodsContent extends Model
+class HomeConfig extends Model
 {
     use SoftDeletes;
 
-    public $timestamps = false;
+    const CONFIG_TYPE = [
+        '1' => '轮播图',
+        '2' => '金刚圈',
+    ];
 }
