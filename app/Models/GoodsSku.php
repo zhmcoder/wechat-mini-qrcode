@@ -39,7 +39,7 @@ class GoodsSku extends Model
 
     public function attrs(): BelongsToMany
     {
-        return $this->belongsToMany(GoodsAttrValue::class, 'goods_sku_attr_value_maps', 'goods_sku_id', 'attr_value_id');
+        return $this->belongsToMany(GoodsAttrValue::class, 'goods_sku_attr_value_maps', 'goods_sku_id', 'attr_value_id')->whereNull('goods_sku_attr_value_maps.deleted_at');
     }
 
     public function getStockNumAttribute($key)
