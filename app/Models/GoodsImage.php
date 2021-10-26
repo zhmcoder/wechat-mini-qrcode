@@ -11,5 +11,7 @@ class GoodsImage extends Model
 
     public $timestamps = false;
 
+    protected $hidden = ['id'];
+
     protected $guarded = [];
 }

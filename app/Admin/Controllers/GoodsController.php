@@ -9,6 +9,7 @@ use App\Models\GoodsAttrMap;
 use App\Models\GoodsAttrValue;
 use App\Models\GoodsAttrValueMap;
 use App\Models\GoodsClass;
+use App\Models\GoodsImage;
 use Illuminate\Http\Request;
 use SmallRuralDog\Admin\Components\Attrs\SelectOption;
 use SmallRuralDog\Admin\Components\Form\Cascader;
@@ -154,10 +155,13 @@ class GoodsController extends AdminController
             $form->goods_class_id = collect($form->input("goods_class_path"))->last();
             $form->user_id = \Admin::user()->id;
             $form->shop_id = 0;
+
+            GoodsImage::query()->where('goods_id', $form->model()->id)->delete();
             $form->images = collect($form->input("images"))->map(function ($item, $index) {
                 $item["order"] = $index;
                 return $item;
             })->all();
+
         });
 
         $form->editQuery(function (Form $form, $editData) {
