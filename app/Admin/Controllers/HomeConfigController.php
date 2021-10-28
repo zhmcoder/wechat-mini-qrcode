@@ -4,10 +4,14 @@ namespace App\Admin\Controllers;
 
 use Andruby\DeepAdmin\Controllers\ContentController;
 use Andruby\DeepAdmin\Models\EntityField;
+use App\Models\Goods;
 use App\Models\HomeConfig;
+use App\Models\Shop;
+use SmallRuralDog\Admin\Components\Attrs\SelectOption;
 use SmallRuralDog\Admin\Components\Form\CSwitch;
 use SmallRuralDog\Admin\Components\Form\Input;
 use SmallRuralDog\Admin\Components\Form\RadioGroup;
+use SmallRuralDog\Admin\Components\Form\Select;
 use SmallRuralDog\Admin\Components\Form\Upload;
 use SmallRuralDog\Admin\Components\Form\WangEditor;
 use SmallRuralDog\Admin\Components\Grid\Boole;
@@ -91,6 +95,18 @@ class HomeConfigController extends ContentController
         $form->item('h5_url', 'H5链接')->component(
             Input::make()->textarea(4)->showWordLimit()
         )->inputWidth(15)->vif('jump_type', 3);
+
+        $form->item('relation_id', "商品")->required(true, 'integer')->serveRules("min:1")->component(Select::make(null)->filterable()->options(function () {
+            return Goods::query()->orderByDesc('id')->where('on_shelf', 1)->get()->map(function ($item) {
+                return SelectOption::make($item->id, $item->name);
+            })->all();
+        }))->vif('jump_type', 1);
+
+        $form->item('relation_id', "店铺")->required(true, 'integer')->serveRules("min:1")->component(Select::make(null)->filterable()->options(function () {
+            return Shop::query()->orderByDesc('id')->get()->map(function ($item) {
+                return SelectOption::make($item->id, $item->name);
+            })->all();
+        }))->vif('jump_type', 2);
 
         $form->item('config_type', 'config_type')->hideLabel()->component(Input::make($config_type)->type('hidden'));
 
