@@ -8,4 +8,6 @@ Route::group([
     'middleware' => 'verifySign'
 ], function (Router $router) {
     $router->post('user/login', 'UserController@userLogin')->name('user.login');
+
+    $router->get('home/index', 'HomeController@index')->name('home.index');
 });

@@ -10,7 +10,7 @@
     "require": {
         "php": "^7.2.5",
         "andruby/deep-admin": "^1.2",
-        "andruby/laravel-vue-admin": "^0.8.3",
+        "andruby/laravel-vue-admin": "^0.8.4",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -46,6 +46,7 @@
             "database/factories"
         ],
         "files": [
+            "app/helpers.php"
         ]
     },
     "autoload-dev": {
