@@ -23,13 +23,4 @@ Route::group([
     $router->post("goods/addGoodsAttr", "GoodsController@addGoodsAttr")->name("addGoodsAttr");
     $router->post("goods/addGoodsAttrValue", "GoodsController@addGoodsAttrValue")->name("addGoodsAttrValue");
 
-    // 首页配置
-    $router->resource('home/config', 'HomeConfigController')->names('home.config');
-    $router->resource('search/list', 'SearchController')->names('search.list');
-    $router->resource('app/info', 'AppInfoController')->names('app.info');
-
-    $router->get('home/column/relation_grid/{home_column_id}', 'HomeColumnController@relation_grid')->name('home.column.relation_grid');
-    $router->get('home/column/relation', 'HomeColumnController@relation')->name('home.category.info');
-    $router->resource('home/column', 'HomeColumnController')->names('home.column');
-
 });

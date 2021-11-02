@@ -176,8 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 
-        SmallRuralDog\Admin\AdminServiceProvider::class,
-        Andruby\DeepAdmin\AdminServiceProvider::class,
+//        SmallRuralDog\Admin\AdminServiceProvider::class,
+        Andruby\HomeConfig\HomeServiceProvider::class,
         // zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
