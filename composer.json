@@ -39,14 +39,16 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Andruby\\HomeConfig\\": "packages/Andruby/home-config/src/"
         },
         "classmap": [
             "database/seeds",
             "database/factories"
         ],
         "files": [
-            "app/helpers.php"
+            "app/helpers.php",
+            "packages/Andruby/home-config/src/helpers.php"
         ]
     },
     "autoload-dev": {
