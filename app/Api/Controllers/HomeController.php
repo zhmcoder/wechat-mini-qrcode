@@ -3,6 +3,7 @@
 namespace App\Api\Controllers;
 
 use Andruby\HomeConfig\Services\HomeConfigService;
+use App\Api\Services\MallHomeService;
 use App\Api\Validates\HomeValidate;
 use App\Models\Goods;
 use Illuminate\Http\Request;
@@ -16,7 +17,8 @@ class HomeController extends BaseController
         $os_type = request('os_type', '3');
         $date_time = date('Y-m-d H:i:s');
 
-        $data = HomeConfigService::home_data($app_id, $os_type, $date_time);
+        $homeConfig = new MallHomeService();
+        $data = $homeConfig->home_data($app_id, $os_type, $date_time);
         $this->responseJson(0, 'success', $data);
     }
 }
