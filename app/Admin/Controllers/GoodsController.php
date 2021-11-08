@@ -143,6 +143,7 @@ class GoodsController extends AdminController
             ->component(WangEditor::make()->uploadImgServer($uploadImages)
                 ->uploadFileName('file')->style('min-height:200px;'));
 
+        /*
         $form->addValidatorRule([
             'goods_sku.goods_sku_list.*.price' => ["numeric", "min:0.01"],
             'goods_sku.goods_sku_list' => ["array", "min:1"]
@@ -150,6 +151,7 @@ class GoodsController extends AdminController
             'goods_sku.goods_sku_list.*.price.min' => '价格最小为0.01',
             'goods_sku.goods_sku_list.min' => '至少要添加一个规则'
         ]);
+        */
 
         $form->saving(function (Form $form) {
             $form->goods_class_id = collect($form->input("goods_class_path"))->last();
@@ -162,6 +164,11 @@ class GoodsController extends AdminController
                 return $item;
             })->all();
 
+            $skus = $form->input("goods_sku")['goods_sku_list'] ?? [];
+            $one_attr = $form->input("one_attr");
+            if ($one_attr == 0 && count($skus) <= 0) {
+                return \Admin::responseError('至少要添加一个规则');
+            }
         });
 
         $form->editQuery(function (Form $form, $editData) {
