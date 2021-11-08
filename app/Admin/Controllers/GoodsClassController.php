@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Models\GoodsClass;
 use SmallRuralDog\Admin\Components\Attrs\SelectOption;
 use SmallRuralDog\Admin\Components\Form\Checkbox;
+use SmallRuralDog\Admin\Components\Form\CSwitch;
 use SmallRuralDog\Admin\Components\Form\InputNumber;
 use SmallRuralDog\Admin\Components\Form\Select;
 use SmallRuralDog\Admin\Components\Form\Upload;
@@ -59,10 +60,10 @@ class GoodsClassController extends AdminController
             })->prepend(SelectOption::make(0, '顶级菜单'));
         }));
         $form->item('name', '名称')->inputWidth(15)->required();
-        $form->item('goods_class_key', '唯一标识')->inputWidth(15)->required();
+        $form->item('goods_class_key', '唯一标识')->inputWidth(15)->required()->unique(true, 'goods_classes', 'goods_class_key', '唯一标识');
         $form->item('icon', '图标')->required()->component(Upload::make()->width(80)->height(80));
         $form->item('order', '排序')->required(true, 'integer')->component(InputNumber::make(1));
-        $form->item('status', '状态')->required(true, 'integer')->component(Checkbox::make(1, "启用"));
+        $form->item('status', '状态')->component(CSwitch::make());
 
         return $form;
     }

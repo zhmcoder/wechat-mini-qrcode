@@ -55,7 +55,7 @@ class GoodsController extends AdminController
         })->component(Tag::make()->type(["上架" => "success", "下架" => "danger"]));
 
         $grid->column('created_at', '发布时间')->customValue(function ($row, $value) {
-
+            return $value;
         });
 
         $grid->actions(function (Grid\Actions $actions) {
@@ -131,7 +131,7 @@ class GoodsController extends AdminController
 
         $form->item("line_price", "划线价")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
 
-        $form->item("stock_num", "库存")->vif("one_attr", 1)->component(Input::make(0)->append("元"))->inputWidth(5);
+        $form->item("stock_num", "库存")->vif("one_attr", 1)->component(Input::make(0)->append("个"))->inputWidth(5);
         $form->item("goods_sku", "产品规格")
             ->vif("one_attr", 0)
             ->component(GoodsSku::make());
