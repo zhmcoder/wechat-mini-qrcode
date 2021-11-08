@@ -2,16 +2,13 @@
 
 namespace App\Api\Controllers;
 
-use Andruby\HomeConfig\Services\HomeConfigService;
 use App\Api\Services\MallHomeService;
-use App\Api\Validates\HomeValidate;
-use App\Models\Goods;
+use App\Api\Validates\Validate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends BaseController
 {
-    public function index(Request $request, HomeValidate $validate)
+    public function index(Request $request, Validate $validate)
     {
         $app_id = request('app_id', 'deep.mall');
         $os_type = request('os_type', '3');
