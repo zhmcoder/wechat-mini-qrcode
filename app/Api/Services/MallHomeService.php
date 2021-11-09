@@ -4,6 +4,7 @@ namespace App\Api\Services;
 
 use Andruby\HomeConfig\Services\HomeConfigService;
 use App\Models\Goods;
+use App\Models\GoodsClass;
 use App\Models\Shop;
 
 class  MallHomeService extends HomeConfigService
@@ -25,6 +26,16 @@ class  MallHomeService extends HomeConfigService
     {
         $select = ['id', 'name', 'image'];
         $data = Shop::query()->select($select)->findOrFail($id);
+
+        $data['image'] = http_path($data['image']);
+
+        return $data;
+    }
+
+    protected function goods_classes($table_name, $id)
+    {
+        $select = ['id', 'name', 'icon as image'];
+        $data = GoodsClass::query()->select($select)->findOrFail($id);
 
         $data['image'] = http_path($data['image']);
 
