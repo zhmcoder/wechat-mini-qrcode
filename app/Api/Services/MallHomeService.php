@@ -24,10 +24,10 @@ class  MallHomeService extends HomeConfigService
 
     protected function shops($table_name, $id)
     {
-        $select = ['id', 'name', 'logo'];
+        $select = ['id', 'name', 'image'];
         $data = Shop::query()->select($select)->findOrFail($id);
 
-        $data['logo'] = http_path($data['logo']);
+        $data['image'] = http_path($data['image']);
 
         return $data;
     }
