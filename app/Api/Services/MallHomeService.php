@@ -14,10 +14,9 @@ class  MallHomeService extends HomeConfigService
         $select = ['id', 'name', 'price'];
         $goods = Goods::query()->select($select)->findOrFail($id);
 
-        collect($goods['images'])->map(function ($image) {
-            $image['path'] = http_path($image['path']);
-            return $image;
-        });
+        $image = collect($goods['images'])->first();
+        $goods['image'] = isset($image['path']) ? http_path($image['path']) : '';
+        unset($goods['images']);
 
         return $goods;
     }
