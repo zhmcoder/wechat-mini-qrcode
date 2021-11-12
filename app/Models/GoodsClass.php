@@ -11,6 +11,8 @@ class GoodsClass extends Model
 {
     use SoftDeletes, ModelTree;
 
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
     public function children(): HasMany
     {
         return $this->hasMany(get_class($this), 'parent_id')->orderBy('order');
