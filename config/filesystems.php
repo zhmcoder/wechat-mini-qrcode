@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
@@ -60,13 +60,13 @@ return [
             'access_key' => env('QINIU_ACCESS_KEY', 'Xl5q-CIbQzO23OysB-wprNSIvoaJ1R6UQ12LFgcv'),
             'secret_key' => env('QINIU_SECRET_KEY', 'UML2kbGyO89E3o1yy0T7HVivUnYd2R8wcsK3yjvK'),
             'bucket' => env('QINIU_BUCKET', 'xunji'),
-            'domain' => env('QINIU_DOMAIN', 'img.zdapk.cn'),
+            'domain' => env('QINIU_DOMAIN', 'https://img.zdapk.cn'),
             'domains' => [
-                'default'   => 'img.zdapk.cn', //你的七牛域名
-                'https'     => 'img.zdapk.cn',         //你的HTTPS域名
-                'custom'    => 'img.zdapk.cn',                //Useless 没啥用，请直接使用上面的 default 项
+                'default' => 'img.zdapk.cn', //你的七牛域名
+                'https' => 'img.zdapk.cn',         //你的HTTPS域名
+                'custom' => 'img.zdapk.cn',                //Useless 没啥用，请直接使用上面的 default 项
             ],
-            'access'    => 'public',  //空间访问控制 public 或 private
+            'access' => 'public',  //空间访问控制 public 或 private
 //            'hotlink_prevention_key' => 'afc89ff8bd2axxxxxxxxxxxxxxbb', // CDN 时间戳防盗链的 key。 设置为 null 则不启用本功能。
 //            'hotlink_prevention_key' => 'cbab68a279xxxxxxxxxxab509a', // 同上，备用
         ],
