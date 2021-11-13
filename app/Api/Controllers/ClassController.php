@@ -16,14 +16,10 @@ class ClassController extends BaseController
         $validate_result = $validate->list($request->only([]));
         if ($validate_result) {
 
-            $pageIndex = $request->input('page_index', 1);
-            $pageSize = $request->input('page_size', 20);
             $parent_id = $request->input('parent_id', 0);
 
-            $list = ClassService::instance()->lists($parent_id, $pageIndex, $pageSize);
+            $list = ClassService::instance()->lists($parent_id);
 
-            $data['pageIndex'] = $pageIndex;
-            $data['pageSize'] = $pageSize;
             $data['items'] = $list;
 
             $this->responseJson('0', 'success', $data);
