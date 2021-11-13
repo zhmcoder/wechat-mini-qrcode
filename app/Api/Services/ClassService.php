@@ -21,7 +21,7 @@ class ClassService
     {
         $where = [
             'parent_id' => $parent_id,
-            'status' => 1,
+            'status' => 1
         ];
 
         $list = GoodsClass::query()->orderByDesc('id')->where($where)

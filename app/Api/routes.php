@@ -10,5 +10,8 @@ Route::group([
     $router->post('user/login', 'UserController@userLogin')->name('user.login');
 
     $router->post('Home/index', 'HomeController@index')->name('home.index');
+
     $router->post('Class/list', 'ClassController@list')->name('class.list');
+    $router->post('Brand/list', 'BrandController@list')->name('Brand.list');
+    $router->post('Goods/list', 'GoodsController@list')->name('goods.list');
 });
