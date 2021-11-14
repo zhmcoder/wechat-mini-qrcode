@@ -10,10 +10,10 @@ use App\Models\Shop;
 class  MallHomeService extends HomeConfigService
 {
 
-    protected function goods($table_name, $id)
+    protected function goods($table_info, $config, $config_data)
     {
         $select = ['id', 'name', 'price'];
-        $goods = Goods::query()->select($select)->findOrFail($id);
+        $goods = Goods::query()->select($select)->findOrFail($config['third_id']);
 
         $image = collect($goods['images'])->first();
         $goods['image'] = isset($image['path']) ? http_path($image['path']) : '';
@@ -22,20 +22,20 @@ class  MallHomeService extends HomeConfigService
         return $goods;
     }
 
-    protected function shops($table_name, $id)
+    protected function shops($table_info, $config, $config_data)
     {
         $select = ['id', 'name', 'image'];
-        $data = Shop::query()->select($select)->findOrFail($id);
+        $data = Shop::query()->select($select)->findOrFail($config['third_id']);
 
         $data['image'] = http_path($data['image']);
 
         return $data;
     }
 
-    protected function goods_classes($table_name, $id)
+    protected function goods_classes($table_info, $config, $config_data)
     {
         $select = ['id', 'name', 'icon as image'];
-        $data = GoodsClass::query()->select($select)->findOrFail($id);
+        $data = GoodsClass::query()->select($select)->findOrFail($config['third_id']);
 
         $data['image'] = http_path($data['image']);
 
