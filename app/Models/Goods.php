@@ -19,6 +19,8 @@ class Goods extends Model
         'created_at' => "Y-m-d H:i:s",
     ];
 
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
     protected $with = ['images'];
 
     /**
