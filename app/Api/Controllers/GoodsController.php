@@ -28,5 +28,21 @@ class GoodsController extends BaseController
             $this->responseJson('-1', $validate->message);
         }
     }
+
+    public function detail(Request $request, GoodsValidate $validate)
+    {
+        $validate_result = $validate->detail($request->only(['goods_id']));
+        if ($validate_result) {
+
+            $goodsId = $request->input('goods_id');
+            $list = GoodsService::instance()->detail($goodsId);
+
+            $data['items'] = $list;
+
+            $this->responseJson('0', 'success', $data);
+        } else {
+            $this->responseJson('-1', $validate->message);
+        }
+    }
 }
 

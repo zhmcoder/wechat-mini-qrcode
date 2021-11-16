@@ -15,6 +15,8 @@ class GoodsAttrMap extends Model
 
     protected $guarded = [];
 
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
     /**
      * 产品销售属性关联本体
      * @return BelongsTo

@@ -18,6 +18,8 @@ class GoodsSku extends Model
 
     protected $appends = ['stock_num', 'cover'];
 
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
     protected $with = ['stock'];
 
     /**

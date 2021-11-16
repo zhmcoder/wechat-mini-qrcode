@@ -12,4 +12,6 @@ class GoodsSkuStock extends Model
     public $timestamps = false;
 
     protected $guarded = [];
+
+    protected $hidden = ['deleted_at'];
 }

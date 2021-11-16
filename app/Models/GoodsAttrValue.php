@@ -13,6 +13,8 @@ class GoodsAttrValue extends Model
 
     public $timestamps = false;
 
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
     public function allValues($goods_attr_id)
     {
         return self::query()->where('goods_attr_id', $goods_attr_id)->orderBy("sort")->get();

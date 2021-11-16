@@ -14,6 +14,8 @@ class GoodsAttrValueMap extends Model
 
     public $timestamps = false;
 
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
     /**
      * 产品销售属性值关联的本体（详细信息）
      * @return BelongsTo

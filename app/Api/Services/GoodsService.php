@@ -19,7 +19,6 @@ class GoodsService
 
     public function lists($pageIndex, $pageSize)
     {
-
         $brandId = request('brand_id');
         $keywords = request('keywords');
         $sort_prop = request('sort_prop', 'id');
@@ -52,5 +51,19 @@ class GoodsService
             return $goods;
         });
 
+    }
+
+    public function detail($goodsId)
+    {
+        $goods = Goods::query()
+            ->with('content')->with('skus')
+            ->findOrFail($goodsId);
+
+        collect($goods['images'])->map(function ($image) {
+            $image['path'] = http_path($image['path']);
+            return $image;
+        });
+
+        return $goods;
     }
 }
