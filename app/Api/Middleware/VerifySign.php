@@ -27,7 +27,7 @@ class VerifySign
         if ($request_api_sign === $api_sign) {
             return $next($request);
         }
-        error_log_info('api sign error request: ' . json_encode($request->all()));
+        error_log_info('api_sign error is ' . $api_sign . ' request: ' . json_encode($request->all()));
         $data = ['status' => 10000, 'message' => 'api sign error'];
 
         return Response::json($data);
