@@ -57,12 +57,14 @@ class GoodsService
     {
         $goods = Goods::query()
             ->with('content')->with('skus')
-            ->findOrFail($goodsId);
+            ->find($goodsId);
 
-        collect($goods['images'])->map(function ($image) {
-            $image['path'] = http_path($image['path']);
-            return $image;
-        });
+        if (!empty($goods)) {
+            collect($goods['images'])->map(function ($image) {
+                $image['path'] = http_path($image['path']);
+                return $image;
+            });
+        }
 
         return $goods;
     }

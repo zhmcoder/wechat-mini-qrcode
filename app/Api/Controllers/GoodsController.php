@@ -23,9 +23,9 @@ class GoodsController extends BaseController
             $data['pageSize'] = $pageSize;
             $data['items'] = $list;
 
-            $this->responseJson('0', 'success', $data);
+            $this->responseJson(self::CODE_SUCCESS_CODE, 'success', $data);
         } else {
-            $this->responseJson('-1', $validate->message);
+            $this->responseJson(self::CODE_ERROR_CODE, $validate->message);
         }
     }
 
@@ -35,13 +35,14 @@ class GoodsController extends BaseController
         if ($validate_result) {
 
             $goodsId = $request->input('goods_id');
-            $list = GoodsService::instance()->detail($goodsId);
+            $goods = GoodsService::instance()->detail($goodsId);
+            if (empty($goods)) {
+                $this->responseJson(self::CODE_SHOW_MSG, '商品已下架');
+            }
 
-            $data['items'] = $list;
-
-            $this->responseJson('0', 'success', $data);
+            $this->responseJson(self::CODE_SUCCESS_CODE, 'success', $goods);
         } else {
-            $this->responseJson('-1', $validate->message);
+            $this->responseJson(self::CODE_ERROR_CODE, $validate->message);
         }
     }
 }

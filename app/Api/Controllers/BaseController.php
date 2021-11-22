@@ -6,15 +6,9 @@ use App\Http\Controllers\Controller;
 
 class BaseController extends Controller
 {
-    /**
-     * 成功code码
-     */
-    public $STATUS_SUCCESS = 0;
-
-    /**
-     * 失败code码
-     */
-    public $STATUS_FAILED = 1;
+    const CODE_SHOW_MSG = 2001;
+    const CODE_ERROR_CODE = -1;
+    const CODE_SUCCESS_CODE = 0;
 
     protected function responseJson($status = -1, $msg = null, $data = null)
     {
