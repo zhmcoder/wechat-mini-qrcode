@@ -13,11 +13,13 @@ class  MallHomeService extends HomeConfigService
     protected function goods($table_info, $config, $config_data)
     {
         $select = ['id', 'name', 'price'];
-        $goods = Goods::query()->select($select)->findOrFail($config['third_id']);
+        $goods = Goods::query()->select($select)->find($config['third_id']);
 
-        $image = collect($goods['images'])->first();
-        $goods['image'] = isset($image['path']) ? http_path($image['path']) : '';
-        unset($goods['images']);
+        if (!empty($goods)) {
+            $image = collect($goods['images'])->first();
+            $goods['image'] = isset($image['path']) ? http_path($image['path']) : '';
+            unset($goods['images']);
+        }
 
         return $goods;
     }
@@ -25,9 +27,11 @@ class  MallHomeService extends HomeConfigService
     protected function shops($table_info, $config, $config_data)
     {
         $select = ['id', 'name', 'image'];
-        $data = Shop::query()->select($select)->findOrFail($config['third_id']);
+        $data = Shop::query()->select($select)->find($config['third_id']);
 
-        $data['image'] = http_path($data['image']);
+        if (!empty($data)) {
+            $data['image'] = http_path($data['image']);
+        }
 
         return $data;
     }
@@ -35,9 +39,11 @@ class  MallHomeService extends HomeConfigService
     protected function goods_classes($table_info, $config, $config_data)
     {
         $select = ['id', 'name', 'icon as image'];
-        $data = GoodsClass::query()->select($select)->findOrFail($config['third_id']);
+        $data = GoodsClass::query()->select($select)->find($config['third_id']);
 
-        $data['image'] = http_path($data['image']);
+        if (!empty($data)) {
+            $data['image'] = http_path($data['image']);
+        }
 
         return $data;
     }

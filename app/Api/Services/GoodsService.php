@@ -56,7 +56,7 @@ class GoodsService
     public function detail($goodsId)
     {
         $goods = Goods::query()
-            ->with('content')->with('skus')
+            ->with('content')->with('attr_map')
             ->find($goodsId);
 
         if (!empty($goods)) {

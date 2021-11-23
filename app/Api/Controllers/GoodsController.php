@@ -61,5 +61,7 @@ class GoodsController extends BaseController
 
         $this->responseJson('0', 'success', $data);
     }
+
+
 }
 
