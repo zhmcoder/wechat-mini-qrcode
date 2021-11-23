@@ -5,7 +5,7 @@ use Illuminate\Routing\Router;
 Route::group([
     'prefix' => 'Api',
     'namespace' => 'App\\Api\\Controllers',
-    'middleware' => 'verifySign'
+    //'middleware' => 'verifySign'
 ], function (Router $router) {
     $router->post('user/login', 'UserController@userLogin')->name('user.login');
 
@@ -24,5 +24,9 @@ Route::group([
     $router->post('Cart/delete', 'OrderCartController@delete')->name('Cart.delete');
 
     $router->post('District/list', 'DistrictController@list')->name('District.list');
+    $router->post('Address/list', 'AddressController@list')->name('Address.list');
+    $router->post('Address/add', 'AddressController@add')->name('Address.add');
+    $router->post('Address/update', 'AddressController@update')->name('Address.update');
+    $router->post('Address/delete', 'AddressController@delete')->name('Address.delete');
 
 });
