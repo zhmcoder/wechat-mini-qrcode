@@ -15,4 +15,6 @@ Route::group([
     $router->post('Brand/list', 'BrandController@list')->name('Brand.list');
     $router->post('Goods/list', 'GoodsController@list')->name('goods.list');
     $router->post('Goods/detail', 'GoodsController@detail')->name('goods.detail');
+
+    $router->post('Search/list', 'SearchController@list')->name('Search.list');
 });
