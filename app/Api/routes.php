@@ -23,4 +23,6 @@ Route::group([
     $router->post('Cart/update', 'OrderCartController@update')->name('Cart.update');
     $router->post('Cart/delete', 'OrderCartController@delete')->name('Cart.delete');
 
+    $router->post('District/list', 'DistrictController@list')->name('District.list');
+
 });
