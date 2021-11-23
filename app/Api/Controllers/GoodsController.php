@@ -2,7 +2,9 @@
 
 namespace App\Api\Controllers;
 
+use App\Api\Services\BrandService;
 use App\Api\Services\GoodsService;
+use App\Api\Validates\BrandValidate;
 use App\Api\Validates\GoodsValidate;
 use Illuminate\Http\Request;
 
@@ -44,6 +46,20 @@ class GoodsController extends BaseController
         } else {
             $this->responseJson(self::CODE_ERROR_CODE, $validate->message);
         }
+    }
+
+    public function search(Request $request, BrandValidate $validate)
+    {
+        $brand = BrandService::instance()->lists();
+
+        $data[] = [
+            'name' => '品牌',
+            'key' => 'brand_id',
+            'is_active' => false,
+            'list' => $brand,
+        ];
+
+        $this->responseJson('0', 'success', $data);
     }
 }
 
