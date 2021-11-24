@@ -19,7 +19,7 @@ Route::group([
     $router->post('Goods/search', 'GoodsController@search')->name('Goods.search');
 
     $router->post('Cart/add', 'OrderCartController@add')->name('Cart.add');
-    $router->post('Cart/list', 'OrderCartController@list')->name('Cart.list');
+    $router->get('Cart/list', 'OrderCartController@list')->name('Cart.list');
     $router->post('Cart/update', 'OrderCartController@update')->name('Cart.update');
     $router->post('Cart/delete', 'OrderCartController@delete')->name('Cart.delete');
 

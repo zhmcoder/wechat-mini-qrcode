@@ -35,10 +35,12 @@ class OrderCartController extends BaseController
             $pageSize = $request->input('page_size', 20);
 
             $list = OrderCartService::instance()->lists($userInfo, $pageIndex, $pageSize);
+            $goods_num = collect($list)->sum('num');
 
             $data['pageIndex'] = $pageIndex;
             $data['pageSize'] = $pageSize;
             $data['items'] = $list;
+            $data['goods_num'] = $goods_num;
 
             $this->responseJson('0', 'success', $data);
         } else {
