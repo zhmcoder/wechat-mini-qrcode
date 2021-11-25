@@ -22,11 +22,11 @@ class  WxPayValidate extends Validate
     public function weixin($request_data)
     {
         $rules = [
-            'activity_id' => 'required|int',
+            'cart_ids' => 'required|string',
         ];
         $message = [
-            'activity_id.required' => '活动标识不能为空',
-            'activity_id.integer' => '活动标识值不正确',
+            'cart_ids.required' => '购物车标识不能为空',
+            'cart_ids.string' => '购物车标识值不正确',
         ];
         return $this->validate($request_data, $rules, $message);
     }
