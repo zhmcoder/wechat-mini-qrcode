@@ -17,7 +17,7 @@ class DistrictController extends BaseController
             'level' => $level,
             'parent_id' => $parent_id,
         ];
-        $list = District::where($where)->get(['id', 'name'])->toArray();
+        $list = District::query()->where($where)->get(['id', 'name'])->toArray();
 
         $data['items'] = $list;
 
