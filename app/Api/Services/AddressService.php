@@ -44,7 +44,7 @@ class AddressService
         $county_id = request('county_id');
         $address = request('address');
         $type = request('type');
-        $is_default = request('is_default');
+        $is_default = request('is_default', false);
 
         $data = [
             'user_id' => $userInfo['id'],
@@ -55,7 +55,7 @@ class AddressService
             'county_id' => $county_id,
             'address' => $address,
             'type' => $type,
-            'is_default' => $is_default,
+            'is_default' => $is_default ? 1 : 0,
         ];
 
         $data = Address::query()->create($data);
