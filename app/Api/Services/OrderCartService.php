@@ -83,10 +83,11 @@ class OrderCartService
         $where = [
             'user_id' => $userInfo['id'],
         ];
-        if (!empty($goods_id)) {
-            $where['goods_id'] = $goods_id;
-        }
 
-        return OrderCart::query()->where($where)->delete();
+        if (!empty($goods_id)) {
+            return OrderCart::query()->where($where)->whereIn('goods_id', $goods_id)->delete();
+        } else {
+            return OrderCart::query()->where($where)->delete();
+        }
     }
 }

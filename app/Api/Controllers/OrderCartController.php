@@ -71,7 +71,12 @@ class OrderCartController extends BaseController
         if ($validate_result) {
             $userInfo = $this->userInfo();
 
-            $goods_id = $request->input('goods_id');
+            $goods_id = $request->input('goods_id', '');
+            if (!empty($goods_id)) {
+                if (!is_array($goods_id)) {
+                    $this->responseJson('-1', '商品标识格式错误');
+                }
+            }
 
             $data = OrderCartService::instance()->delete($userInfo, $goods_id);
 
