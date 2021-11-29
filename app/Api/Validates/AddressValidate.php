@@ -67,4 +67,15 @@ class AddressValidate extends Validate
         ];
         return $this->validate($request_data, $rules, $message);
     }
+
+    public function info($request_data)
+    {
+        $rules = [
+            'address_id' => 'required|integer',
+        ];
+        $message = [
+            'address_id.required' => '收货地址标识不能为空。',
+        ];
+        return $this->validate($request_data, $rules, $message);
+    }
 }

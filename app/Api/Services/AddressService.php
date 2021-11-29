@@ -101,4 +101,20 @@ class AddressService
 
         return Address::query()->where($where)->delete();
     }
+
+    public function info($userInfo, $address_id)
+    {
+        $where = [
+            'user_id' => $userInfo['id'],
+            'id' => $address_id,
+        ];
+        $address = Address::query()->where($where)->first();
+
+        if (!empty($address)) {
+            $address['province'] = District::query()->find($address['province_id']);
+            $address['city'] = District::query()->find($address['city_id']);
+            $address['county'] = District::query()->find($address['county_id']);
+        }
+        return $address;
+    }
 }

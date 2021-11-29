@@ -28,5 +28,6 @@ Route::group([
     $router->post('Address/add', 'AddressController@add')->name('Address.add');
     $router->post('Address/update', 'AddressController@update')->name('Address.update');
     $router->post('Address/delete', 'AddressController@delete')->name('Address.delete');
+    $router->post('Address/info', 'AddressController@info')->name('Address.info');
 
 });

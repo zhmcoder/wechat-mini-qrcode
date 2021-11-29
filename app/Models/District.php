@@ -15,10 +15,10 @@ class District extends Model
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
-    protected $with = ['children'];
+    //protected $with = ['children'];
 
     public function children(): HasMany
     {
-        return $this->hasMany(get_class($this), 'parent_id')->where('level', '<', 4);
+        return $this->hasMany(get_class($this), 'parent_id')->where('level', '<', 4)->with('children');
     }
 }

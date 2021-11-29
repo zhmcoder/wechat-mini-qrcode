@@ -68,5 +68,24 @@ class AddressController extends BaseController
             $this->responseJson('-1', $validate->message);
         }
     }
+
+    public function info(Request $request, AddressValidate $validate)
+    {
+        $validate_result = $validate->info($request->only(['address_id']));
+        if ($validate_result) {
+            $userInfo = $this->userInfo();
+
+            $address_id = $request->input('address_id');
+
+            $data = AddressService::instance()->info($userInfo, $address_id);
+            if (!empty($data)) {
+                $this->responseJson('0', 'success', $data);
+            } else {
+                $this->responseJson('-1', '收货地址信息不存在');
+            }
+        } else {
+            $this->responseJson('-1', $validate->message);
+        }
+    }
 }
 
