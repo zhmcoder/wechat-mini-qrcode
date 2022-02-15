@@ -3,9 +3,9 @@
 namespace App\Api\Services;
 
 use Andruby\HomeConfig\Services\HomeConfigService;
-use App\Models\Goods;
-use App\Models\GoodsClass;
-use App\Models\Shop;
+use Andruby\DeepGoods\Models\Goods;
+use Andruby\DeepGoods\Models\GoodsClass;
+use Andruby\DeepGoods\Models\Shop;
 
 class  MallHomeService extends HomeConfigService
 {

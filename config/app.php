@@ -178,6 +178,7 @@ return [
 
 //        SmallRuralDog\Admin\AdminServiceProvider::class,
         Andruby\HomeConfig\HomeServiceProvider::class,
+        Andruby\DeepGoods\GoodsServiceProvider::class,
         // zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,

@@ -2,7 +2,7 @@
 
 namespace App\Api\Services;
 
-use App\Models\Brand;
+use Andruby\DeepGoods\Models\Brand;
 
 /**
  * @method static BrandService instance()

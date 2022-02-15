@@ -2,7 +2,7 @@
 
 namespace App\Api\Services;
 
-use App\Models\GoodsClass;
+use Andruby\DeepGoods\Models\GoodsClass;
 
 /**
  * @method static ClassService instance()
