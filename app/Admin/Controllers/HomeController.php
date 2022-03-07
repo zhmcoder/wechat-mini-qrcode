@@ -2,10 +2,10 @@
 
 namespace App\Admin\Controllers;
 
-use SmallRuralDog\Admin\Components\Widgets\Alert;
-use SmallRuralDog\Admin\Controllers\AdminController;
-use SmallRuralDog\Admin\Layout\Content;
-use SmallRuralDog\Admin\Layout\Row;
+use Andruby\DeepAdmin\Components\Widgets\Alert;
+use Andruby\DeepAdmin\Controllers\AdminController;
+use Andruby\DeepAdmin\Layout\Content;
+use Andruby\DeepAdmin\Layout\Row;
 
 class HomeController extends AdminController
 {

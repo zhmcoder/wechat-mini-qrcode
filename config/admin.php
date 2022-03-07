@@ -48,7 +48,7 @@ return [
         'providers' => [
             'admin' => [
                 'driver' => 'eloquent',
-                'model' => SmallRuralDog\Admin\Auth\Database\Administrator::class,
+                'model' => Andruby\DeepAdmin\Auth\Database\Administrator::class,
             ],
         ],
         // Add "remember me" to login form
@@ -81,16 +81,16 @@ return [
         'connection' => '',
         // User tables and model.
         'users_table' => 'admin_users',
-        'users_model' => SmallRuralDog\Admin\Auth\Database\Administrator::class,
+        'users_model' => Andruby\DeepAdmin\Auth\Database\Administrator::class,
         // Role table and model.
         'roles_table' => 'admin_roles',
-        'roles_model' => SmallRuralDog\Admin\Auth\Database\Role::class,
+        'roles_model' => Andruby\DeepAdmin\Auth\Database\Role::class,
         // Permission table and model.
         'permissions_table' => 'admin_permissions',
-        'permissions_model' => SmallRuralDog\Admin\Auth\Database\Permission::class,
+        'permissions_model' => Andruby\DeepAdmin\Auth\Database\Permission::class,
         // Menu table and model.
         'menu_table' => 'admin_menu',
-        'menu_model' => SmallRuralDog\Admin\Auth\Database\Menu::class,
+        'menu_model' => Andruby\DeepAdmin\Auth\Database\Menu::class,
         // Pivot table for table above.
         'operation_log_table' => 'admin_operation_log',
         'user_permissions_table' => 'admin_user_permissions',

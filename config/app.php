@@ -176,7 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 
-//        SmallRuralDog\Admin\AdminServiceProvider::class,
+        // Andruby\DeepAdmin\AdminServiceProvider::class,
         Andruby\HomeConfig\HomeServiceProvider::class,
         Andruby\DeepGoods\GoodsServiceProvider::class,
         // zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
@@ -235,7 +235,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'Admin' => SmallRuralDog\Admin\Facades\Admin::class,
+        'Admin' => Andruby\DeepAdmin\Facades\Admin::class,
     ],
 
 ];

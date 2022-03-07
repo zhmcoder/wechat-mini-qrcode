@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use SmallRuralDog\Admin\Controllers\AuthController as BaseAuthController;
+use Andruby\DeepAdmin\Controllers\AuthController as BaseAuthController;
 
 class AuthController extends BaseAuthController
 {
