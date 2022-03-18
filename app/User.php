@@ -50,11 +50,11 @@ class User extends Authenticatable
 
     public function __construct(array $attributes = [])
     {
-        $connection = config('admin.database.connection') ?: config('database.default');
+        $connection = config('deep_admin.database.connection') ?: config('database.default');
 
         $this->setConnection($connection);
 
-        $this->setTable(config('admin.database.users_table'));
+        $this->setTable(config('deep_admin.database.users_table'));
 
         parent::__construct($attributes);
     }

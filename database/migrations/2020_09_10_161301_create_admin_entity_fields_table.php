@@ -13,7 +13,7 @@ class CreateAdminEntityFieldsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('admin.database.entity_fields_table'), function (Blueprint $table) {
+        Schema::create(config('deep_admin.database.entity_fields_table'), function (Blueprint $table) {
             $table->increments('id');
             $table->integer('entity_id');
             $table->string('name', 64);
@@ -51,6 +51,6 @@ class CreateAdminEntityFieldsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('admin.database.entity_fields_table'));
+        Schema::dropIfExists(config('deep_admin.database.entity_fields_table'));
     }
 }

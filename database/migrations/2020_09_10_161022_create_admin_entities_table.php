@@ -13,7 +13,7 @@ class CreateAdminEntitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('admin.database.entities_table'), function (Blueprint $table) {
+        Schema::create(config('deep_admin.database.entities_table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
             $table->string('table_name', 60)->default('')->unique();
@@ -34,6 +34,6 @@ class CreateAdminEntitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('admin.database.entities_table'));
+        Schema::dropIfExists(config('deep_admin.database.entities_table'));
     }
 }

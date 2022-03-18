@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/'.config('admin.route.prefix'));
+    return redirect('/'.config('deep_admin.route.prefix'));
 });
